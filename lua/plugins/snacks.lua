@@ -1,25 +1,46 @@
 return {
   "folke/snacks.nvim",
+  lazy = false,
+
   opts = {
     picker = {
-      -- Configure the picker windows
       win = {
         input = {
           keys = {
-            ["l"] = { "list_down", mode = { "i", "n" } },
-            ["k"] = { "list_up", mode = { "i", "n" } },
+            ["l"] = { "list_down", mode = "n" },
+            ["k"] = { "list_up", mode = "n" },
+          },
+        },
+
+        list = {
+          keys = {
+            ["k"] = "list_up",
+            ["l"] = "list_down",
+            [";"] = "confirm",
           },
         },
       },
 
-      -- Configure the explorer source specifically
       sources = {
         explorer = {
+          follow_file = true,
+
           layout = {
-            preset = "sidebar", -- Use a preset or define custom layout
+            preset = "sidebar",
             layout = {
               position = "right",
-              width = 30, -- Set width if you want
+              width = 30,
+            },
+          },
+
+          win = {
+            list = {
+              keys = {
+                ["k"] = "list_up",
+                ["l"] = "list_down",
+                [";"] = "confirm",
+                ["j"] = "explorer_up",
+              },
             },
           },
         },
