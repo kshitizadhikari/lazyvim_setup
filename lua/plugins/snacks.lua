@@ -2,6 +2,7 @@ return {
   "folke/snacks.nvim",
   opts = {
     picker = {
+      -- Configure the picker windows
       win = {
         input = {
           keys = {
@@ -10,12 +11,17 @@ return {
           },
         },
       },
-    },
 
-    explorer = {
-      layout = {
-        layout = {
-          position = "right",
+      -- Configure the explorer source specifically
+      sources = {
+        explorer = {
+          layout = {
+            preset = "sidebar", -- Use a preset or define custom layout
+            layout = {
+              position = "right",
+              width = 30, -- Set width if you want
+            },
+          },
         },
       },
     },
