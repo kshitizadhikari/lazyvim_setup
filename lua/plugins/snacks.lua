@@ -2,6 +2,34 @@ return {
   "folke/snacks.nvim",
   lazy = false,
 
+  keys = {
+    {
+      "<leader>tv",
+      function()
+        Snacks.terminal.open(nil, {
+          win = {
+            position = "right",
+            style = "terminal",
+          },
+        })
+      end,
+      desc = "Terminal Right",
+    },
+
+    {
+      "<leader>th",
+      function()
+        Snacks.terminal(nil, {
+          win = {
+            position = "bottom",
+            height = 0.3,
+          },
+        })
+      end,
+      desc = "Terminal Bottom",
+    },
+  },
+
   opts = {
     picker = {
       win = {
@@ -24,6 +52,10 @@ return {
       sources = {
         explorer = {
           follow_file = true,
+
+          -- Show hidden files and gitignored files
+          hidden = true,
+          ignored = true,
 
           layout = {
             preset = "sidebar",

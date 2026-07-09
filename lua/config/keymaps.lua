@@ -33,3 +33,17 @@ vim.keymap.set("n", "<C-:>", "<C-w>l", { desc = "Window Right" })
 
 vim.keymap.set("n", "<leader>bj", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
 vim.keymap.set("n", "<leader>b;", "<cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
+
+-- vim.keymap.set("n", "<leader>tv", function()
+--   vim.cmd("vsplit")
+--   vim.cmd("terminal")
+--   vim.cmd("startinsert")
+-- end, { desc = "New terminal (vertical)" })
+--
+-- vim.keymap.set("n", "<leader>th", function()
+--   vim.cmd("split")
+--   vim.cmd("terminal")
+--   vim.cmd("startinsert")
+-- end, { desc = "New terminal (horizontal)" })
+--
+-- vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
