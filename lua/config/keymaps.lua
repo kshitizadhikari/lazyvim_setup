@@ -85,3 +85,5 @@ vim.keymap.set("n", "<C-:>", "<C-w>l", { desc = "Window Right (fallback)" })
 -- end, { desc = "New terminal (horizontal)" })
 --
 -- vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
+--
+vim.keymap.set("n", "'", "`", { remap = true })
