@@ -19,20 +19,58 @@ vim.keymap.set("n", "<C-;>", "<C-w>l")
 -- Window Navigation (Ctrl)
 -- ============================================================
 
-vim.keymap.set("n", "<C-j>", "<C-w>h", { desc = "Window Left" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Window Up" })
-vim.keymap.set("n", "<C-l>", "<C-w>j", { desc = "Window Down" })
-vim.keymap.set("n", "<C-;>", "<C-w>l", { desc = "Window Right" })
+-- ============================================================
+-- Buffer navigation in current split (wraps to split at the edges)
+-- ============================================================
+local function listed_buffers()
+  local bufs = {}
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.bo[buf].buflisted then
+      table.insert(bufs, buf)
+    end
+  end
+  return bufs
+end
 
--- Some terminals send Ctrl+Shift+; as <C-:>
-vim.keymap.set("n", "<C-:>", "<C-w>l", { desc = "Window Right" })
+local function current_index(bufs)
+  local cur = vim.api.nvim_get_current_buf()
+  for i, b in ipairs(bufs) do
+    if b == cur then
+      return i
+    end
+  end
+end
+
+local function buffer_next_or_split()
+  local bufs = listed_buffers()
+  local idx = current_index(bufs)
+  if idx and idx < #bufs then
+    vim.cmd("BufferLineCycleNext")
+  else
+    vim.cmd("wincmd l") -- move to split on the right
+  end
+end
+
+local function buffer_prev_or_split()
+  local bufs = listed_buffers()
+  local idx = current_index(bufs)
+  if idx and idx > 1 then
+    vim.cmd("BufferLineCyclePrev")
+  else
+    vim.cmd("wincmd h") -- move to split on the left
+  end
+end
+
+vim.keymap.set("n", "<C-;>", buffer_next_or_split, { desc = "Next buffer (or right split at end)" })
+vim.keymap.set("n", "<C-j>", buffer_prev_or_split, { desc = "Prev buffer (or left split at start)" })
 
 -- ============================================================
--- Buffer Navigation (Shift)
+-- Split navigation (Ctrl+Shift)
 -- ============================================================
-
-vim.keymap.set("n", "<leader>bj", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
-vim.keymap.set("n", "<leader>b;", "<cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
+vim.keymap.set("n", "<C-S-j>", "<C-w>h", { desc = "Window Left" })
+vim.keymap.set("n", "<C-S-;>", "<C-w>l", { desc = "Window Right" })
+-- fallback: some terminals send Shift+; as ':' rather than a real S- modifier
+vim.keymap.set("n", "<C-:>", "<C-w>l", { desc = "Window Right (fallback)" })
 
 -- vim.keymap.set("n", "<leader>tv", function()
 --   vim.cmd("vsplit")
