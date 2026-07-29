@@ -68,8 +68,11 @@ vim.keymap.set("n", "<C-j>", buffer_prev_or_split, { desc = "Prev buffer (or lef
 -- Split navigation (Ctrl+Shift)
 -- ============================================================
 vim.keymap.set("n", "<C-S-j>", "<C-w>h", { desc = "Window Left" })
+vim.keymap.set("n", "<C-S-k>", "<C-w>k", { desc = "Window Up" })
+vim.keymap.set("n", "<C-S-l>", "<C-w>j", { desc = "Window Down" })
 vim.keymap.set("n", "<C-S-;>", "<C-w>l", { desc = "Window Right" })
--- fallback: some terminals send Shift+; as ':' rather than a real S- modifier
+
+-- Fallback: some terminals send Shift+; as ':' instead of a real S- modifier
 vim.keymap.set("n", "<C-:>", "<C-w>l", { desc = "Window Right (fallback)" })
 
 -- vim.keymap.set("n", "<leader>tv", function()
