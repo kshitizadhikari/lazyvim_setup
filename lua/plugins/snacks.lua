@@ -57,6 +57,12 @@ return {
           hidden = true,
           ignored = true,
 
+          -- Ignore these directories
+          exclude = {
+            ".next",
+            "node_modules",
+          },
+
           layout = {
             preset = "sidebar",
             layout = {
