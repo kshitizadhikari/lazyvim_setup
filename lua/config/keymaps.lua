@@ -90,3 +90,7 @@ vim.keymap.set("n", "<C-:>", "<C-w>l", { desc = "Window Right (fallback)" })
 -- vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 --
 vim.keymap.set("n", "'", "`", { remap = true })
+vim.keymap.set("n", "<Esc>", function()
+  vim.cmd("let @/ = ''")
+  vim.cmd("nohlsearch")
+end)
